@@ -16,11 +16,12 @@ public class Image {
     private Long imageId;
 
     @Lob
+    @Column(columnDefinition = "blob")
     @JsonProperty("image")
     private byte[] image;
 
-    @JsonProperty("image_description")
-    private String imageDescription;
+    @JsonProperty("image_name")
+    private String imageName;
     
     @JsonProperty("creation_date")
     private LocalDateTime creationDate;

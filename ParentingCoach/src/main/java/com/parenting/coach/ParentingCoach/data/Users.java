@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Data
 public class Users {
@@ -30,6 +32,7 @@ public class Users {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
+    @Length(min = 3, max = 1000)
     @JsonProperty("address")
     private String address;
 

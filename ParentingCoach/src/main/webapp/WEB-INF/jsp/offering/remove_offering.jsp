@@ -7,15 +7,19 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet/breadcrum.css" />
 	</head>
 <body>
-	<jsp:include page="../common/breadcrumb.jsp" />
-    <font color="red">${errorMessage}</font>
-    <img src="images/StrongRootsLogo.png" width="600" height="200"></img>
+	<jsp:include page="../header.jsp"/>
     <h2 style="color:Red;">Remove Offering</h2>
     <form action="deleteOffering" method="get">
-	    <c:forEach var="offer" items="${offers}">
-	       <input type="checkbox" name="offers" id="offers" value="${offer.offerId}" size="40"> ${offer.offerName} ${offer.offerDescription}</input> <br><br>
-	    </c:forEach>
-	    <button type="submit" formaction="home">Cancel</button>     <button type="submit" formaction="deleteOffering">Confirm</button> 
+    	<table cellpadding="0" cellspacing="0" align="left">
+		    <c:forEach var="offer" items="${offers}">
+		    	<tr>
+		       		<td><input type="checkbox" name="offers" id="offers" value="${offer.offerId}" size="40"> </td><td>${offer.offerName} </td><td>${offer.offerDescription}</input> </td>
+		    	</tr>
+		    </c:forEach>
+		    <tr>
+		    	<td><button type="submit" formaction="home">Cancel</button>  </td><td>   </td><td><button type="submit" formaction="deleteOffering">Confirm</button> </td>
+			</tr>
+		</table>
 	</form>
 </body>
 </html>

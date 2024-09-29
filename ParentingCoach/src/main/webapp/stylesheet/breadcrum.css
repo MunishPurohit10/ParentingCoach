@@ -20,3 +20,14 @@ ul.breadcrumb li a:hover {
 	color: #01447e;
 	text-decoration: underline;
 }
+
+td {
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-right:10px;   
+}
+
+td:first-child {
+  padding-left:10px;
+  padding-right:0;
+}

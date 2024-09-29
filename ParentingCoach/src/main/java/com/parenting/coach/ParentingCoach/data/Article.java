@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+
+import org.hibernate.validator.constraints.Length;
+
 import java.time.LocalDate;
 
 @Entity
@@ -20,6 +23,7 @@ public class Article {
 	@JsonProperty("article_name")
     private String articleName;
 
+	@Length(min = 3, max = 1000)
     @JsonProperty("article_description")
     private String articleDescription;
 

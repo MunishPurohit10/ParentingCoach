@@ -8,14 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.parenting.coach.ParentingCoach.constant.MessageConstants;
 import com.parenting.coach.ParentingCoach.data.Login;
 import com.parenting.coach.ParentingCoach.data.Users;
 import com.parenting.coach.ParentingCoach.service.LoginService;
 import com.parenting.coach.ParentingCoach.service.UsersService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Controller
-public class PersonalDetailsController {
+public class PersonalDetailsController extends BaseController {
 	
 	@Autowired
 	private LoginService loginService;
@@ -23,16 +26,16 @@ public class PersonalDetailsController {
 	private UsersService userService;
 	
 	@GetMapping("addPersonalDetails")
-	public String loginUser(@RequestParam(value = "loginName") String loginName,
-			@RequestParam(value = "password") String password,
-			@RequestParam(value = "firstName") String firstName,
-			@RequestParam(value = "lastName") String lastName,
-			@RequestParam(value = "email") String email,
-			@RequestParam(value = "phoneNumber") String phoneNumber,
-			@RequestParam(value = "address") String address,
-			@RequestParam(value = "country") String country,
-			@RequestParam(value = "city") String city,
-			@RequestParam(value = "zipCode") String zipCode,
+	public String loginUser(@NotBlank @RequestParam(value = "loginName") String loginName,
+			@NotBlank @RequestParam(value = "password") String password,
+			@NotBlank @RequestParam(value = "firstName") String firstName,
+			@NotBlank @RequestParam(value = "lastName") String lastName,
+			@NotBlank @Email @RequestParam(value = "email") String email,
+			@NotBlank @RequestParam(value = "phoneNumber") String phoneNumber,
+			@NotBlank @RequestParam(value = "address") String address,
+			@NotBlank @RequestParam(value = "country") String country,
+			@NotBlank @RequestParam(value = "city") String city,
+			@NotBlank @RequestParam(value = "zipCode") String zipCode,
 			Model model,
 			HttpSession session) {
 		Users user = new Users();
@@ -46,6 +49,7 @@ public class PersonalDetailsController {
 		user.setLastName(lastName);
 		user.setPhoneNumber(phoneNumber);
 		user.setUpdateDate(LocalDateTime.now());
+		user.setType("consultant");
 		Users userAfterSaving = userService.addUsers(user);
 		
 		Login login = new Login();
@@ -56,6 +60,13 @@ public class PersonalDetailsController {
 		login.setUsers(userAfterSaving);
 		loginService.addLogin(login);
 		
-		return "redirect:login";
+		model.addAttribute(MessageConstants.SUCCESS_MESSAGES, MessageConstants.NEW_USER_ADDED_SUCCESSFULLY);
+		
+		return "forward:login";
+	}
+	
+	@Override
+	public String viewName() {
+		return "profile/userdetails";
 	}
 }

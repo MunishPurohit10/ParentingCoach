@@ -12,17 +12,26 @@
 		</script>
 	</head>
 <body>
-	<jsp:include page="../common/breadcrumb.jsp" />
-    <font color="red">${errorMessage}</font>
-    <img src="images/StrongRootsLogo.png" width="600" height="200"></img>
+	<jsp:include page="../header.jsp"/>
     <h2 style="color:Red;">Add Offering</h2>
     <form action="confirmOffering" method="get">
-	    <label>Name</label> : <input type="text" name="offer_name" id="offer_name" size="40"></input> <br><br>
-	    <label>Duration (In Minute)</label> : <input type="text" name="duration" id="duration" size="10"/> <br><br>
-	    <label>Detail</label> : <textarea name="offer_detail" id="offer_detail" rows="20" cols="60"></textarea> <br><br>
-	    <label>Expiry Date</label> : <input name="expiry_date" id="expiry_date" type="text" class="datepicker"/> <br><br>
-	    
-	    <button type="submit" formaction="home">Cancel</button>     <button type="submit" formaction="confirmOffering">Confirm</button> 
+	    <table cellpadding="0" cellspacing="0" align="left">
+	    	<tr>
+		    	<td><label>Name</label> : </td><td><input type="text" name="offer_name" id="offer_name" size="30%" required></input> </td>
+		    </tr>
+		    <tr>
+		    	<td><label>Duration (In Minute)</label> : </td><td><input type="text" name="duration" id="duration" size="20%" required/> </td>
+		    </tr>
+		    <tr>
+		    	<td><label>Detail</label> : </td><td><textarea name="offer_detail" id="offer_detail" rows="20%" cols="30%" required></textarea> </td>
+		    </tr>
+		    <tr>
+		    	<td><label>Expiry Date</label> : </td><td><input name="expiry_date" id="expiry_date" type="datetime-local" required/> </td>
+		    </tr>
+		    <tr>
+		    	<td><button type="submit" formaction="home">Cancel</button>     </td><td><button type="submit" formaction="confirmOffering">Confirm</button> </td>
+			</tr>
+		</table>
 	</form>
 </body>
 </html>

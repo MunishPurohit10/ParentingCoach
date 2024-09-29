@@ -9,13 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.parenting.coach.ParentingCoach.constant.MessageConstants;
 import com.parenting.coach.ParentingCoach.data.Login;
 import com.parenting.coach.ParentingCoach.data.Users;
 import com.parenting.coach.ParentingCoach.service.LoginService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.NotBlank;
 
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
 
 	@Autowired
 	private LoginService loginService;
@@ -31,8 +33,8 @@ public class LoginController {
 	}
 	
 	@GetMapping("loginUser")
-	public String loginUser(@RequestParam(value = "name") String name,
-			@RequestParam(value = "password") String password, Model model,
+	public String loginUser(@NotBlank @RequestParam(value = "name") String name,
+			@NotBlank @RequestParam(value = "password") String password, Model model,
 			HttpSession session) {
 		List<Login> listLogins = loginService.getAllLogin();
 		Optional<Login> loginOptional = listLogins.stream().filter(login -> login.getLoginName().equals(name))
@@ -50,9 +52,11 @@ public class LoginController {
 				model.addAttribute("lastName", user.getLastName());
 				return "redirect:home";
 			} else {
-				// TODO: Add error message
+				model.addAttribute(MessageConstants.ERROR_MESSAGES, MessageConstants.LOGIN_VALIDATION_FAILURE);
 				return "login";
 			}
+		} else {
+			model.addAttribute(MessageConstants.ERROR_MESSAGES, MessageConstants.LOGIN_VALIDATION_FAILURE);
 		}
 		return "login";
 	}
@@ -61,7 +65,8 @@ public class LoginController {
 	public String loginUser(Model model,
 			HttpSession session) {
 		session.invalidate();
-		return "redirect:login";
+		model.addAttribute(MessageConstants.SUCCESS_MESSAGES, MessageConstants.LOGOUT_SUCCESSFULLY);
+		return "login";
 	}
 	
 	@GetMapping("addNewUser")
@@ -69,4 +74,8 @@ public class LoginController {
 		return "profile/userdetails";
 	}
 	
+	@Override
+	public String viewName() {
+		return "login";
+	}
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 @Data
 public class WorkshopEvent {
@@ -19,6 +21,7 @@ public class WorkshopEvent {
 	@JsonProperty("workshop_name")
     private String workshopName;
 
+	@Length(min = 3, max = 1000)
     @JsonProperty("workshop_description")
     private String workshopDescription;
 
@@ -27,6 +30,9 @@ public class WorkshopEvent {
 
     @JsonProperty("duration")
     private Integer duration;
+    
+    @JsonProperty("capacity")
+    private Integer capacity;
     
     @JsonProperty("is_active")
     private Boolean isActive;

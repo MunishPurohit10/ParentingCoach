@@ -30,9 +30,7 @@
 		</style>
 	</head>
 <body>
-	<jsp:include page="../common/breadcrumb.jsp" />
-    <font color="red">${errorMessage}</font>
-    <img src="images/StrongRootsLogo.png" width="600" height="200"></img>
+	<jsp:include page="../header.jsp"/>
     <h2 style="color:Red;">Remove Article</h2>
     <form action="deleteArticle" method="get">
 	    <c:forEach var="article" items="${articles}">

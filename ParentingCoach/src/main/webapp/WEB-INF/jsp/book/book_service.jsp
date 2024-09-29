@@ -14,16 +14,15 @@
 		</script>
 	</head>
 <body>
-	<jsp:include page="../common/breadcrumb.jsp" />
-    <font color="red">${errorMessage}</font>
-    <img src="images/StrongRootsLogo.png" width="600" height="200"></img>
+	<jsp:include page="../header.jsp"/>
     <h2 style="color:Red;">Select Service ${service}</h2>
     <form action="bookSlot" method="get">
-	    <label>Booking Slot</label> : 
+	    <label>Booking Slot</label> :
+	    <input type="hidden" name="offerId" value="${offerId}"/>
 	    <c:forEach var="sessionInterval" items="${sessionIntervalList}">
-	       <input type="radio" name="sessionInterval" id="sessionInterval" value="${sessionInterval.startDateTime}" > ${sessionInterval.startDateTime} - ${sessionInterval.endDateTime}</input> <br><br>
+	       <input type="radio" name="sessionIntervalStart" id="sessionIntervalStart" value="${sessionInterval.startDateTime}" > ${sessionInterval.startDateTime} - ${sessionInterval.endDateTime}</input> <br><br>
 	    </c:forEach>
-	    <button type="submit" formaction="home">Cancel</button>     <button type="button" formaction="bookSlot">Confirm</button> 
+	    <button type="submit" formaction="home">Cancel</button>     <button type="submit" formaction="bookSlot">Confirm</button> 
 	</form>
 </body>
 </html>

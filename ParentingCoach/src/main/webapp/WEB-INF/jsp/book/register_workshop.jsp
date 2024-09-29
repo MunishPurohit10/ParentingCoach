@@ -5,13 +5,12 @@
 		<link rel="stylesheet" type="text/css" href="stylesheet/breadcrum.css" />
 	</head>
 <body>
-	<jsp:include page="../common/breadcrumb.jsp" />
-    <font color="red">${errorMessage}</font>
-    <img src="images/StrongRootsLogo.png" width="600" height="200"></img>
+	<jsp:include page="../header.jsp"/>
     <h2 style="color:Red;">Select Workshop ${workshopEvent.workshopName}</h2>
     ${workshopEvent.workshopDescription}
     <br><br>
     <form action="bookWorkshopSlot" method="get">
+    	<input type="hidden" name="workshopEventId" value="${workshopEvent.workshopEventId}"/>
 	    <label>Workshop Start</label> : ${workshopEventStart} <br><br>
 	    <label>Workshop End</label> :  ${workshopEventEnd} <br><br>
 	    
